@@ -4,7 +4,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './List.scss';
 
-const List = ({ list }) => {
+const List = ({ list, isFavorite, title }) => {
   const responsive = {
     superLargeDesktop5: {
       breakpoint: { max: 4000, min: 2100 },
@@ -41,7 +41,7 @@ const List = ({ list }) => {
   };
   return (
     <div className="list">
-      <span className="list-title">{list.title}</span>
+      <span className="list-title">{title}</span>
       <header>
         <Carousel
           className="carousel"
@@ -50,9 +50,10 @@ const List = ({ list }) => {
           centerMode={true}
           swipeable={false}
         >
-          {list.contents.map((item, i) => (
+          {isFavorite ? (list ?? []).map((item, i) => (<ListItem item={item} key={i} />)) : (list.contents ?? []).map((item, i) => (
             <ListItem item={item} key={i} />
           ))}
+
         </Carousel>
       </header>
     </div>
@@ -60,3 +61,9 @@ const List = ({ list }) => {
 };
 
 export default List;
+
+
+// {
+//   title: "mylist"
+//   contents: arr from api
+// }

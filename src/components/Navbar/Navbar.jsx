@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import './Navbar.scss';
 import { AuthContext } from '../../auth/authContext';
-import {Logout} from '../../auth/authAction';
+import {Logout, LOGOUT} from '../../auth/authAction';
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, dispatch } = useContext(AuthContext);
@@ -16,7 +16,7 @@ function Navbar() {
   };
 
   const logoutHandler = () => {
-    dispatch(Logout);
+    dispatch({type: LOGOUT});
   }
 
   return (
