@@ -12,7 +12,7 @@ import List from '../../components/List/List';
 import './HomePage.scss';
 
 function HomePage({ type }) {
-  const { user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [{ loading, error, lists }, dispatch] = useReducer(
     homePageReducer,
@@ -23,12 +23,12 @@ function HomePage({ type }) {
     const getFavoriteList = async () => {
       try {
         const res = await axios.get('/user', {
-          headers: { authorization: `Bearer ${user.token}`},
+          headers: { authorization: `Bearer ${user.token}` },
         })
       }
-      catch(err){
+      catch (err) {
 
-      } 
+      }
     }
   })
 
@@ -37,7 +37,7 @@ function HomePage({ type }) {
       dispatch({ type: 'GET_REQUEST' });
       try {
         const firstList = await axios.get('/user', {
-          headers: { authorization: `Bearer ${user.token}`},
+          headers: { authorization: `Bearer ${user.token}` },
         })
         const res = await axios.get(`list?type=${type ? type : ''}`, {
           headers: { authorization: `Bearer ${user.token}` },
@@ -46,7 +46,7 @@ function HomePage({ type }) {
         sortedData.unshift(firstList.data);
         dispatch({
           type: 'GET_SUCCESS',
-          payload:  sortedData,
+          payload: sortedData,
         });
       } catch (err) {
         dispatch({ type: 'GET_FAIL', payload: err.message });
@@ -71,7 +71,9 @@ function HomePage({ type }) {
         <Error error={error}></Error>
       ) : (
         <>
-          <List className="list" list={user.myList} isFavorite={true} title="Favorites" />
+          {user && user.myList && (
+            <List className="list" list={user.myList} isFavorite={true} title="Favorites" />
+          )}
           {lists.map((item, i) => (
             <List className="list" key={i} list={item} isFavorite={false} title={item.title} />
           ))}
@@ -79,7 +81,7 @@ function HomePage({ type }) {
       )}
     </div>
   );
-  
+
 }
 
 export default HomePage;

@@ -3,6 +3,8 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAIL = "LOGIN_FAIL"
 export const LOGOUT = "LOGOUT"
 export const ADDED_TO_FAVORITE = 'ADDED_TO_FAVORITE'
+export const REMOVE_FROM_FAVORITE = 'REMOVE_FROM_FAVORITE'
+
 
 export const LoginStart = ()=>({
     type:LOGIN_START
@@ -19,4 +21,7 @@ export const Logout = ()=>({
 })
 export const AddToFavorite = (content) => ({
     type: ADDED_TO_FAVORITE, payload: content
+})
+export const RemoveFromFavorite = (content) => ({
+    type: REMOVE_FROM_FAVORITE, payload: content
 })

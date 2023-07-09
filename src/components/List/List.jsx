@@ -50,7 +50,7 @@ const List = ({ list, isFavorite, title }) => {
           centerMode={true}
           swipeable={false}
         >
-          {isFavorite ? (list ?? []).map((item, i) => (<ListItem item={item} key={i} />)) : (list.contents ?? []).map((item, i) => (
+          {isFavorite ? (list ?? []).map((item, i) => (<ListItem isFavorite={isFavorite} item={item} key={i} />)) : (list.contents ?? []).map((item, i) => (
             <ListItem item={item} key={i} />
           ))}
 
